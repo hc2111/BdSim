@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <canvas id="canvas" width="1000" height="800"></canvas>
+    <img src="images/logo.png" id="my-image">
+    <script src="js/fabric.js"></script>
+    <script>
+        var canvas = new fabric.Canvas('canvas');
+        canvas.selection = false;
+
+        var imgElement = document.getElementById('my-image');
+        imgElement.style.visibility = 'hidden';
+        var imgInstance = new fabric.Image(imgElement, {
+          left: 100,
+          top: 100,
+          selectable:  false
+        });
+        canvas.add(imgInstance);
+        canvas.hoverCursor = 'default';
+    </script>
+</body>
+</html>

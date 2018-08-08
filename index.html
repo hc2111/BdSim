@@ -3,21 +3,99 @@
 <head>
 </head>
 <body>
-    <canvas id="canvas" width="1000" height="800"></canvas>
+    <canvas id="canvas" width="1500" height="750"></canvas>
     <img src="images/logo.png" id="my-image">
+    <img src="images/+.png" id="AIAI+">
+    <img src="images/raised_+.png" id="AIAI+_raised">
+    <img src="images/-.png" id="AIAI-">
+    <img src="images/AIAI.png" id="AIAI">
+    <img src="images/xp.png" id="AIAIxp">
+    <img src="images/number.png" id="AIAInumber">
+
     <script src="js/fabric.js"></script>
     <script>
         var canvas = new fabric.Canvas('canvas');
         canvas.selection = false;
 
-        var imgElement = document.getElementById('my-image');
-        imgElement.style.visibility = 'hidden';
-        var imgInstance = new fabric.Image(imgElement, {
+        var logoSrc = document.getElementById('my-image');
+        logoSrc.style.visibility = 'hidden';
+        var logo = new fabric.Image(logoSrc, {
           left: 100,
           top: 100,
-          selectable:  false
+          selectable: false
         });
-        canvas.add(imgInstance);
+        canvas.add(logo);
+
+        var AIAISrc = document.getElementById('AIAI');
+        AIAISrc.style.visibility = 'hidden';
+        var AIAI = new fabric.Image(AIAISrc, {
+          left: 130,
+          top: 136,
+          selectable: false
+        });
+        canvas.add(AIAI);
+
+        var AIAIplusSrc = document.getElementById('AIAI+');
+        AIAIplusSrc.style.visibility = 'hidden';
+        var AIAIplus = new fabric.Image(AIAIplusSrc, {
+          left: 250,
+          top: 135,
+          selectable: false
+        });
+        canvas.add(AIAIplus);
+
+        var AIAIminusSrc = document.getElementById('AIAI-');
+      //  AIAIminusSrc.style.visibility = 'hidden';
+        var AIAIminus = new fabric.Image(AIAIminusSrc, {
+          left: 100,
+          top: 135,
+          selectable: false
+        });
+        canvas.add(AIAIminus);
+
+        var AIAIxpSrc = document.getElementById('AIAIxp');
+        AIAIxpSrc.style.visibility = 'hidden';
+        var AIAIxp = new fabric.Image(AIAIxpSrc, {
+          left: 100,
+          top: 100,
+          selectable: false
+        });
+        canvas.add(AIAIxp);
+
+        var AIAInumberSrc = document.getElementById('AIAInumber');
+        AIAInumberSrc.style.visibility = 'hidden';
+        var AIAInumber = new fabric.Image(AIAInumberSrc, {
+          left: 130,
+          top: 255,
+          selectable: false
+        });
+        canvas.add(AIAInumber);
+
+        canvas.on('mouse:over', function(e) {
+            if (e.target == AIAIplus) {
+              AIAIminusSrc.style.visibility = 'hidden';
+              var tst = document.getElementById('AIAI+_raised');
+              e.target.setElement(tst);
+              e.target.setCoords(245,130);
+              canvas.clear();
+              canvas.add(AIAIplus);
+              canvas.setCoords();
+              canvas.renderAll();
+            }
+            scope.canvas.renderAll();
+         });
+
+         canvas.on('mouse:out', function(e) {
+           if (e.target == AIAIplus) {
+             AIAIminusSrc.style.visibility = 'visible';
+             e.target.setElement(document.getElementById('AIAI+'), {
+               left: 250,
+               top: 135,
+             });
+           }
+           canvas.renderAll();
+         });
+
         canvas.hoverCursor = 'default';
     </script>
 </body>

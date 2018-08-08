@@ -1,102 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="js/easeljs.min.js"></script>
+  <script src="js/preloadjs.min.js"></script>
+  <script>
+    function init() {
+      var stage = new createjs.Stage("canvas");
+
+      var logo = new createjs.Bitmap("images/logo.png");
+      logo.setTransform(100,100);
+      stage.addChild(logo);
+
+      var plusbutton = new createjs.Bitmap("images/+.png");
+      plusbutton.crossOrigin="Anonymous";
+      plusbutton.addEventListener('click', click);
+      stage.addChild(plusbutton);
+
+
+      var circle = new createjs.Shape();
+      circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
+      circle.x = 100;
+      circle.y = 100;
+
+      stage.addChild(circle);
+
+
+
+      stage.update();
+      createjs.Ticker.on("tick", stage);
+
+    }
+    function click(){
+         alert("clicked");
+         stage.update();
+   }
+
+  </script>
 </head>
-<body>
-    <canvas id="canvas" width="1500" height="750"></canvas>
+
+
+
+<body onload="init();">
+  <canvas id="canvas" width="1500" height="750"></canvas>
+    <!--
     <img src="images/logo.png" id="my-image">
     <img src="images/+.png" id="AIAI+">
     <img src="images/raised_+.png" id="AIAI+_raised">
     <img src="images/-.png" id="AIAI-">
     <img src="images/AIAI.png" id="AIAI">
     <img src="images/xp.png" id="AIAIxp">
-    <img src="images/number.png" id="AIAInumber">
+    <img src="images/number.png" id="AIAInumber"> -->
 
-    <script src="js/fabric.js"></script>
-    <script>
-        var canvas = new fabric.Canvas('canvas');
-        canvas.selection = false;
-
-        var logoSrc = document.getElementById('my-image');
-        logoSrc.style.visibility = 'hidden';
-        var logo = new fabric.Image(logoSrc, {
-          left: 100,
-          top: 100,
-          selectable: false
-        });
-        canvas.add(logo);
-
-        var AIAISrc = document.getElementById('AIAI');
-        AIAISrc.style.visibility = 'hidden';
-        var AIAI = new fabric.Image(AIAISrc, {
-          left: 130,
-          top: 136,
-          selectable: false
-        });
-        canvas.add(AIAI);
-
-        var AIAIplusSrc = document.getElementById('AIAI+');
-        AIAIplusSrc.style.visibility = 'hidden';
-        var AIAIplus = new fabric.Image(AIAIplusSrc, {
-          left: 250,
-          top: 135,
-          selectable: false
-        });
-        canvas.add(AIAIplus);
-
-        var AIAIminusSrc = document.getElementById('AIAI-');
-      //  AIAIminusSrc.style.visibility = 'hidden';
-        var AIAIminus = new fabric.Image(AIAIminusSrc, {
-          left: 100,
-          top: 135,
-          selectable: false
-        });
-        canvas.add(AIAIminus);
-
-        var AIAIxpSrc = document.getElementById('AIAIxp');
-        AIAIxpSrc.style.visibility = 'hidden';
-        var AIAIxp = new fabric.Image(AIAIxpSrc, {
-          left: 100,
-          top: 100,
-          selectable: false
-        });
-        canvas.add(AIAIxp);
-
-        var AIAInumberSrc = document.getElementById('AIAInumber');
-        AIAInumberSrc.style.visibility = 'hidden';
-        var AIAInumber = new fabric.Image(AIAInumberSrc, {
-          left: 130,
-          top: 255,
-          selectable: false
-        });
-        canvas.add(AIAInumber);
-
-        canvas.on('mouse:over', function(e) {
-            if (e.target == AIAIplus) {
-              AIAIminusSrc.style.visibility = 'hidden';
-              var tst = document.getElementById('AIAI+_raised');
-              e.target.setElement(tst);
-              e.target.setCoords(245,130);
-              canvas.clear();
-              canvas.add(AIAIplus);
-              canvas.setCoords();
-              canvas.renderAll();
-            }
-            scope.canvas.renderAll();
-         });
-
-         canvas.on('mouse:out', function(e) {
-           if (e.target == AIAIplus) {
-             AIAIminusSrc.style.visibility = 'visible';
-             e.target.setElement(document.getElementById('AIAI+'), {
-               left: 250,
-               top: 135,
-             });
-           }
-           canvas.renderAll();
-         });
-
-        canvas.hoverCursor = 'default';
-    </script>
 </body>
 </html>
